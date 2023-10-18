@@ -13,7 +13,7 @@ jobs:
   simple_deployment_pipeline:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
       - uses: actions/setup-node@v3
@@ -28,8 +28,9 @@ jobs:
       - name: Run tests
         run: npm test
       - name: e2e test
-        uses: cypress-io/github-action@v5
+        uses: ./
         with:
+          install: false
           working-directory: ./full-stack-open-pokedex
           command: npm run test:e2e
           start: npm run start-prod
