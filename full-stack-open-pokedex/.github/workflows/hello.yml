@@ -1,0 +1,17 @@
+name: Hello World!
+
+on: workflow_dispatch
+
+jobs: 
+  hello_world:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello World
+        run: |
+          echo "Hello World!"
+      - name: Now it is
+        run: |
+          date
+      - name: Directory content
+        run: |
+          ls -l
