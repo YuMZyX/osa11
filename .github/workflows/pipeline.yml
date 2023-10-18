@@ -28,7 +28,7 @@ jobs:
       - name: Run tests
         run: npm test
       - name: e2e test
-        uses: ./
+        uses: cypress-io/github-action@v5
         with:
           install: false
           working-directory: ./full-stack-open-pokedex
