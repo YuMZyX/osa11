@@ -1,5 +1,9 @@
 name: Deployment pipeline
 
+defaults:
+  run:
+    working-directory: ./full-stack-open-pokedex
+
 on:
   push:
     branches:
