@@ -45,5 +45,15 @@ jobs:
           api-key: ${{ secrets.RENDER_API_KEY }}
           interval: 10
           timeout: 300
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: windows-latest
+    steps:
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
       
           
