@@ -35,10 +35,9 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Render Deployment
-        uses: sws2apps/render-deployment@v1.6.0
+        uses: ttskch/render-deploy@v1.0.0
         with:
-          serviceId: ${{ secrets.RENDER_SERVICE_ID }}
-          apiKey: ${{ secrets.RENDER_API_KEY }}
-          multipleDeployment: false
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
       
           
