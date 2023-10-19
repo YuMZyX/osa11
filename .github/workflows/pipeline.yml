@@ -47,7 +47,7 @@ jobs:
           timeout: 300
   tag_release:
     needs: [simple_deployment_pipeline]
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
