@@ -38,6 +38,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Render Deployment
+        if: ${{ github.event_name == 'push' }}
         uses: ttskch/render-deploy@v1.0.0
         with:
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
