@@ -45,6 +45,14 @@ jobs:
           api-key: ${{ secrets.RENDER_API_KEY }}
           interval: 10
           timeout: 300
+      - name: Discord webhook success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: info
+          details: to https://full-stack-open-pokedex-yt41.onrender.com/ by ${{ toJson(github.event.commits.committer.username) }}
+          text: a new version of pokedex deployed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
     needs: [simple_deployment_pipeline]
@@ -62,5 +70,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+      - name: Discord webhook failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          details: ${{ toJson(github.event.commits.*.url) }} by ${{ toJson(github.event.commits.committer.username) }} broke the build.
+          description: commit
+          text: Build failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       
           
