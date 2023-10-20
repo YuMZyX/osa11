@@ -58,12 +58,9 @@ jobs:
       - name: Discord webhook failure
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
-        env:
-          URL: ${{ toJson(github.event.commits.*.url) }}
-          USERNAME: ${{ toJson(github.event.commits.*.committer.username) }}
         with:
           severity: error
-          details: "$URL by $USERNAME broke the build."
+          details: "${{ github.event.head_commit.url }} by ${{ github.event.head_commit.committer }} broke the build."
           description: commit
           text: Build failed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
