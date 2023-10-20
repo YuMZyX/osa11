@@ -48,17 +48,22 @@ jobs:
       - name: Discord webhook success
         uses: rjstone/discord-webhook-notify@v1
         if: success()
+        env: 
+          USERNAME: ${{ toJson(github.event.commits.*.committer.username) }}
         with:
           severity: info
-          description: to https://full-stack-open-pokedex-yt41.onrender.com/ by ${{ toJson(github.event.commits.*.committer.username) }}
-          text: a new version of pokedex deployed!
+          description: "to https://full-stack-open-pokedex-yt41.onrender.com/ by $USERNAME"
+          text: "a new version of pokedex deployed!"
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Discord webhook failure
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
+        env:
+          URL: ${{ toJson(github.event.commits.*.url) }}
+          USERNAME: ${{ toJson(github.event.commits.*.committer.username) }}
         with:
           severity: error
-          details: ${{ toJson(github.event.commits.*.url) }} by ${{ toJson(github.event.commits.*.committer.username) }} broke the build.
+          details: "$URL by $USERNAME broke the build."
           description: commit
           text: Build failed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
