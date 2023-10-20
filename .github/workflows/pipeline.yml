@@ -60,7 +60,7 @@ jobs:
         if: failure()
         with:
           severity: error
-          details: "${{ github.event.head_commit.url }} by ${{ github.event.pusher.username }} broke the build."
+          details: "${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author }} broke the build."
           description: commit
           text: Build failed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
