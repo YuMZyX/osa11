@@ -43,8 +43,8 @@ jobs:
         with:
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
-          interval: 10
-          timeout: 300
+          interval: 15
+          timeout: 500
       - name: Discord webhook success
         uses: rjstone/discord-webhook-notify@v1
         if: success()
